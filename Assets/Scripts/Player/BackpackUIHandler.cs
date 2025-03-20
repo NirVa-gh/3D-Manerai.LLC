@@ -57,7 +57,7 @@ public class BackpackUIHandler : MonoBehaviour
             if (hit.collider.CompareTag(backpackTag))
             {
                 // Если наведен на рюкзак и удерживается ЛКМ
-                if (Input.GetMouseButton(0)) // ЛКМ удерживается
+                if (Input.GetKeyDown(KeyCode.Q)) // ЛКМ удерживается
                 {
                     OpenInventoryUI();
                 }

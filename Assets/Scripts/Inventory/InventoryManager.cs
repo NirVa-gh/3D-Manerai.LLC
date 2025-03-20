@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UIWidgets;
+using System;
 
 /// <summary>
 /// Класс для управления инвентарем. Отвечает за открытие/закрытие инвентаря, добавление и удаление предметов.
@@ -67,7 +68,7 @@ public class InventoryManager : UIWidget
     private void Update()
     {
         // Проверка на открытие инвентаря по нажатию средней кнопки мыши
-        if (Input.GetMouseButton(2))
+        if (Input.GetKey(KeyCode.Q))
         {
             CheckInventoryUI();
         }
@@ -104,7 +105,7 @@ public class InventoryManager : UIWidget
         isOpened = !isOpened;
         if (isOpened)
         {
-            OpenInventory(true);
+            OpenInventory(true, true, CursorLockMode.Locked);
         }
         else
         {
@@ -124,7 +125,7 @@ public class InventoryManager : UIWidget
         {
             if (hit.collider.CompareTag("Backpack"))
             {
-                OpenInventory(false);
+                OpenInventory(false, false, CursorLockMode.None);
             }
             else
             {
@@ -141,14 +142,24 @@ public class InventoryManager : UIWidget
     /// Открывает инвентарь.
     /// </summary>
     /// <param name="freezeCamera">Замораживает ли камеру при открытии.</param>
-    public void OpenInventory(bool freezeCamera)
+    public void OpenInventory(bool freezeCamera, bool cursorVisible, Enum cursorLockState)
     {
         isOpened = true;
         backgroundPanel.SetActive(true);
         inventoryPanel.gameObject.SetActive(true);
         crosshairImage.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+
+        // Приводим Enum к CursorLockMode
+        if (cursorLockState is CursorLockMode)
+        {
+            Cursor.lockState = (CursorLockMode)cursorLockState;
+        }
+        else
+        {
+            Debug.LogError("Invalid cursor lock state provided.");
+        }
+
+        Cursor.visible = cursorVisible;
         firstPersonLook.freezeCamera = freezeCamera;
     }
 
