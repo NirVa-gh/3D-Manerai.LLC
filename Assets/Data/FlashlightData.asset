@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a653444f4aa9fb43a89f8bf54aca734, type: 3}
-  m_Name: FlashlightObject
+  m_Name: FlashlightData
   m_EditorClassIdentifier: 
   itemName: Flashlight
   weight: 1
   itemType: 1
   maximumAmount: 1
   itemPrefab: {fileID: 4579246459165119991, guid: 8b066e573b1e37b4fb5bb4917dca32c2, type: 3}
-  icon: {fileID: 21300000, guid: 073bc15b8ab9de14ab3680d882ef54b6, type: 3}
+  icon: {fileID: 21300000, guid: 65ed75ded729eb54d989ffcbd9cec3d8, type: 3}
