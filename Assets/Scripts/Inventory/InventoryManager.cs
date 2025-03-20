@@ -179,11 +179,11 @@ public class InventoryManager : UIWidget
     /// Удаляет предмет из инвентаря по имени.
     /// </summary>
     /// <param name="name">Имя предмета.</param>
-    public void RemoveItem(string name)
+    public void RemoveItem(string itemName)
     {
         foreach (InventorySlot slot in slots)
         {
-            if (slot.item != null && slot.item.itemName == name)
+            if (slot.item != null && slot.item.itemName == itemName)
             {
                 slot.item = null;
                 slot.amount = 0;
@@ -191,8 +191,13 @@ public class InventoryManager : UIWidget
                 slot.iconGO.GetComponent<Image>().color = new Color(1, 1, 1, 0);
                 slot.iconGO.GetComponent<Image>().sprite = null;
                 slot.itemAmountText.text = "";
+
+                Debug.Log($"Предмет {itemName} удален из инвентаря.");
+                return;
             }
         }
+
+        Debug.LogWarning($"Предмет {itemName} не найден в инвентаре.");
     }
 
     /// <summary>
